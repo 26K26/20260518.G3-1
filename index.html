@@ -117,20 +117,13 @@
 <body>
 
 <div id="start-screen">
-  <h2>数学小テスト</h2>
+  <h2>２乗小テスト</h2>
   <form id="user-form">
     <label for="name">名前</label>
     <input type="text" id="name" required>
 
     <label for="grade">学年</label>
     <input type="text" id="grade" required>
-
-    <label for="class">クラス</label>
-    <select id="class" required>
-      <option value="">選択してください</option>
-      <option value="A">A</option>
-      <option value="B">B</option>
-    </select>
 
     <label for="number">出席番号</label>
     <select id="number" required>
@@ -186,11 +179,11 @@
   let timerInterval;
   let remainingTime = 60 * 3; // 3分
 
-  // 出席番号（1〜25）を動的に生成
+  // 出席番号（1〜11）を動的に生成
   window.addEventListener('DOMContentLoaded', () => {
     const numberSelect = document.getElementById('number');
     if (numberSelect) {
-      for (let i = 1; i <= 25; i++) {
+      for (let i = 1; i <= 11; i++) {
         const opt = document.createElement('option');
         opt.value = i;
         opt.textContent = i;
