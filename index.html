@@ -192,14 +192,34 @@
     }
   });
 
-  // 開始処理
+ // 開始処理（★原因を特定するデバッグ版に書き換え）
   document.getElementById('user-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const grade = document.getElementById('grade').value.trim();
-    const className = document.getElementById('class').value;
-    const number = document.getElementById('number').value;
+    // 各要素がちゃんと存在するかチェック
+    const nameEl = document.getElementById('name');
+    const gradeEl = document.getElementById('grade');
+    const classEl = document.getElementById('class');
+    const numberEl = document.getElementById('number');
+
+    // 見つからなかったIDを記録する配列
+    let missingIds = [];
+    if (!nameEl) missingIds.push('name (名前)');
+    if (!gradeEl) missingIds.push('grade (学年)');
+    if (!classEl) missingIds.push('class (クラス)');
+    if (!numberEl) missingIds.push('number (出席番号)');
+
+    // もし見つからないものがあれば、画面にアラートを出して処理を止める
+    if (missingIds.length > 0) {
+      alert("【原因発見】HTML内に以下の入力欄が見つかりません！\n" + missingIds.join('\n') + "\n\nコピペミスで消えていないか、ID名が間違っていないか確認してください。");
+      return;
+    }
+
+    // すべて存在する場合のみ、値を取得して進む
+    const name = nameEl.value.trim();
+    const grade = gradeEl.value.trim();
+    const className = classEl.value;
+    const number = numberEl.value;
 
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
