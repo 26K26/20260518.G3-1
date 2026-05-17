@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+#start-screen, #quiz-screen {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+  margin: 15px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+form input, form select {
+  font-size: 16px;
+  padding: 5px;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 5px;
+}
+
+#question-text {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+#answer-input {
+  font-size: 28px;
+  width: 260px;
+  height: 45px;
+  margin: 15px auto;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+#keypad {
+  margin: 20px auto;
+  max-width: 280px;
+}
+
+#keypad button {
+  width: 60px;
+  height: 45px;
+  margin: 4px;
+  font-size: 18px;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#keypad button:hover {
+  background-color: #d0d0d0;
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.button-group button {
+  padding: 10px 25px;
+  font-size: 18px;
+  margin: 0 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  background-color: #45a049;
+}
+
+#timer {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+#quiz-screen {
+  position: relative;
+}
