@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>２乗小テスト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- MathJax 読み込み -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+
+    #start-screen, #quiz-screen {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    form label {
+      display: block;
+      margin: 15px 0;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    form input, form select {
+      font-size: 16px;
+      padding: 5px;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 5px;
+    }
+
+    #question-text {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    #answer-input {
+      font-size: 28px;
+      width: 260px;
+      height: 45px;
+      margin: 15px auto;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #keypad {
+      margin: 20px auto;
+      max-width: 280px;
+    }
+
+    #keypad button {
+      width: 60px;
+      height: 45px;
+      margin: 4px;
+      font-size: 18px;
+      border: none;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #keypad button:hover {
+      background-color: #d0d0d0;
+    }
+
+    .button-group {
+      margin-top: 20px;
+    }
+
+    .button-group button {
+      padding: 10px 25px;
+      font-size: 18px;
+      margin: 0 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button-group button:hover {
+      background-color: #45a049;
+    }
+
+    #timer {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #d32f2f;
+    }
+
+    #quiz-screen {
+      position: relative;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 開始画面 -->
+<div id="start-screen">
+  <h2>数学小テスト</h2>
+  <form id="user-form">
+    <label for="name">名前</label>
+    <input type="text" id="name" required>
+
+    <label for="grade">学年</label>
+    <input type="text" id="grade" required>
+
+    <label for="number">出席番号</label>
+    <select id="number" required>
+      <option value="">選択してください</option>
+      <!-- JavaScriptで動的に生成 -->
+    </select>
+
+    <div class="button-group">
+      <button type="submit">開始</button>
+    </div>
+  </form>
+</div>
+
+<!-- テスト画面 -->
+<div id="quiz-screen">
+  <div id="timer"></div>
+
+  <div id="question-text"></div>
+
+  <input type="text" id="answer-input" readonly>
+
+  <div id="keypad">
+    <button type="button" onclick="insertSymbol('1')">1</button>
+    <button type="button" onclick="insertSymbol('2')">2</button>
+    <button type="button" onclick="insertSymbol('3')">3</button>
+    <button type="button" onclick="insertSymbol('4')">4</button>
+    <button type="button" onclick="insertSymbol('5')">5</button>
+    <button type="button" onclick="insertSymbol('6')">6</button>
+    <button type="button" onclick="insertSymbol('7')">7</button>
+    <button type="button" onclick="insertSymbol('8')">8</button>
+    <button type="button" onclick="insertSymbol('9')">9</button>
+    <button type="button" onclick="insertSymbol('0')">0</button>
+    <button type="button" onclick="clearInput()">C</button>
+    <button type="button" onclick="backspace()">←</button>
+  </div>
+
+  <div class="button-group">
+    <button type="button" id="back-button">前へ</button>
+    <button type="button" id="next-button">次へ</button>
+  </div>
+</div>
+
+<script>
+  // 出席番号（1〜11）を動的に生成
+  window.addEventListener('DOMContentLoaded', () => {
+    const numberSelect = document.getElementById('number');
+    for (let i = 1; i <= 11; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      numberSelect.appendChild(opt);
+    }
+  });
+</script>
+
+<script src="main.js"></script>
+</body>
+</html>
