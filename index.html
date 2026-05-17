@@ -179,6 +179,13 @@
   let timerInterval;
   let remainingTime = 60 * 3; // 3分
 
+  // ★ ユーザー情報を安全にキープするための変数（クラスは削除済み）
+  let savedUserInfo = {
+    name: "",
+    grade: "",
+    number: ""
+  };
+
   // 出席番号（1〜11）を動的に生成
   window.addEventListener('DOMContentLoaded', () => {
     const numberSelect = document.getElementById('number');
@@ -192,31 +199,18 @@
     }
   });
 
- // 開始処理（★原因を特定するデバッグ版に書き換え）
+  // 開始処理
   document.getElementById('user-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // 各要素がちゃんと存在するかチェック
     const nameEl = document.getElementById('name');
     const gradeEl = document.getElementById('grade');
     const numberEl = document.getElementById('number');
 
-    // 見つからなかったIDを記録する配列
-    let missingIds = [];
-    if (!nameEl) missingIds.push('name (名前)');
-    if (!gradeEl) missingIds.push('grade (学年)');
-    if (!numberEl) missingIds.push('number (出席番号)');
-
-    // もし見つからないものがあれば、画面にアラートを出して処理を止める
-    if (missingIds.length > 0) {
-      alert("【原因発見】HTML内に以下の入力欄が見つかりません！\n" + missingIds.join('\n') + "\n\nコピペミスで消えていないか、ID名が間違っていないか確認してください。");
-      return;
-    }
-
-    // すべて存在する場合のみ、値を取得して進む
-    const name = nameEl.value.trim();
-    const grade = gradeEl.value.trim();
-    const number = numberEl.value;
+    // 開始の瞬間に、入力された値を安全な変数にキープ
+    savedUserInfo.name = nameEl.value.trim();
+    savedUserInfo.grade = gradeEl.value.trim();
+    savedUserInfo.number = numberEl.value;
 
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -328,10 +322,11 @@
     document.getElementById('next-button').disabled = true;
     document.getElementById('back-button').disabled = true;
 
-    const name = encodeURIComponent(document.getElementById('name').value);
-    const grade = encodeURIComponent(document.getElementById('grade').value);
-    const className = encodeURIComponent(document.getElementById('class').value);
-    const number = encodeURIComponent(document.getElementById('number').value);
+    // ★ キープしておいた変数から安全にデータを取得（クラッシュを完全回避）
+    const name = encodeURIComponent(savedUserInfo.name);
+    const grade = encodeURIComponent(savedUserInfo.grade);
+    const className = encodeURIComponent(""); // クラス項目は空文字で固定送信
+    const number = encodeURIComponent(savedUserInfo.number);
     const answersStr = encodeURIComponent(answers.join(','));
 
     const score = quizData.reduce((acc, q, i) => acc + (answers[i] === q.answer ? 1 : 0), 0);
